@@ -16,12 +16,14 @@
 						const word = alphabet.charAt(i);
 						wordArray.push(word);
 						capitalizeFirstLetter(wordArray);
-						lookforthisword(wordArray);
 					}
 					else{
 						wordArray.push('Not a valid index');
 					}
 				});
+				if(wordArray != 'Not a valid index'){
+					lookforthisword(wordArray);
+				}
 				document.getElementById('result').innerHTML = wordArray;
 			}
 			function letterToIndex(letter) {
