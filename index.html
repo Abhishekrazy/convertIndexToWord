@@ -23,12 +23,14 @@
 				});
 				if(wordArray != 'Not a valid index'){
 					console.log('wordArray Before: ', wordArray);
-					wordArray = capitalizeFirstLetter(wordArray).join('');
+					wordArray = capitalizeFirstLetter(wordArray);
+					wordArray = wordArray.join('');
+
 					console.log('wordArray After: ', wordArray);
 					lookforthisword(wordArray);
 				}
-				console.log('wordArray: ', wordArray.join(''));
-				document.getElementById('result').innerHTML = wordArray.join('');;
+				console.log('wordArray: ', wordArray);
+				document.getElementById('result').innerHTML = wordArray;;
 			}
 			function letterToIndex(letter) {
 				// Convert the letter to lowercase to handle uppercase input
