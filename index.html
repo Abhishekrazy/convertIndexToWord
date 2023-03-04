@@ -20,7 +20,7 @@
 						finalWord = wordArray.join('');
 					}
 					else{
-						finalWord.push('Not a valid index');
+						finalWord = 'Not a valid index';
 					}
 				});
 				if(finalWord != 'Not a valid index'){
@@ -64,7 +64,6 @@
 					});
 			}
 			// Set the default function to letterToIndex()
-			window.currentFunction = convertIndexToWord;
 			function toggleFunction() {
 				// Get the toggle switch and the button elements
 				const toggle = document.getElementById("checkbox");
