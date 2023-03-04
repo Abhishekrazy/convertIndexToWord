@@ -30,19 +30,29 @@
 				document.getElementById('result').innerHTML = finalWord;;
 			}
 			function letterToIndex() {
-				const letter = document.getElementById('index-input').value;
-				console.log('letter: ', letter);
-				// Convert the letter to lowercase to handle uppercase input
-				const lowercaseLetter = letter.toLowerCase();
+				const input = document.getElementById('index-input').value;
+				console.log('input: ', input);
+				// Split the input string by space into an array of words
+				const words = input.split(' ');
+				console.log('words: ', words);
+				// Array to store the index of each word
+				const indices = [];
+				// Loop through each word, convert it to index, and push to indices array
+				words.forEach((word) => {
+					// Convert the word to lowercase
+					const lowercaseWord = word.toLowerCase();
+					// Get the ASCII code of the first character of the word
+					const asciiCode = lowercaseWord.charCodeAt(0);
+					// Subtract the ASCII code of 'a' to get the index (0-25)
+					const index = asciiCode - 96;
+					indices.push(index);
+				});
 
-				//Check the Word in the Dictionary
-				lookforthisword(lowercaseLetter);
-				// Get the ASCII code of the lowercase letter
-				const asciiCode = lowercaseLetter.charCodeAt(0);
-				// Subtract the ASCII code of 'a' to get the index (0-25)
-				const index = asciiCode - 97;
-				
-				document.getElementById('result').innerHTML = index;;
+				// Join the indices array into a string separated by space
+				const result = indices.join(' ');
+
+				// Display the result in the result element
+				document.getElementById('result').innerHTML = result;
 			}
 			function capitalizeFirstLetter(str) {
 				return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
