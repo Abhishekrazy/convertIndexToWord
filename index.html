@@ -57,20 +57,27 @@
 			// Set the default function to letterToIndex()
 			window.currentFunction = convertIndexToWord;
 			function toggleFunction() {
+				// Get the toggle switch and the button elements
 				const toggle = document.getElementById("toggle");
+				const button = document.getElementById('button');
 				const heading = document.getElementById("heading");
 
 				if (toggle.checked) {
-				heading.innerText = "Convert Letter to Index";
+					heading.innerText = "Convert Letter to Index";
 				} else {
-				heading.innerText = "Convert English Alphabet Index Number to Word";
+					heading.innerText = "Convert English Alphabet Index Number to Word";
 				}
-				const useLetterToIndex = document.getElementById('toggle-function').checked;
-				if (useLetterToIndex) {
-					window.currentFunction = letterToIndex;
-				} else {
-					window.currentFunction = convertIndexToWord;
+				// Add an event listener to the toggle switch
+				toggle.addEventListener('change', function() {
+				// If the toggle switch is checked, update the button's onclick attribute to call convertIndexToWord()
+				if (toggle.checked) {
+					button.setAttribute('onclick', 'convertIndexToWord()');
 				}
+				// If the toggle switch is not checked, update the button's onclick attribute to call letterToIndex()
+				else {
+					button.setAttribute('onclick', 'letterToIndex()');
+				}
+				});
 			}
 
 		</script>
