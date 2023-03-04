@@ -34,12 +34,7 @@
 				return index;
 			}
 			function capitalizeFirstLetter(str) {
-				for (var i = 0; i < str.length; i++) {
-					if (arrMapKey.indexOf(str.charAt(i)) == -1) {
-						arrMapKey.push(str.charAt(i));
-						return arrMapValue.push(1);
-					}
-				}
+				return string.toString().charAt(0).toUpperCase() + string.toString().slice(1);
 			}
 			function lookforthisword(string){
 				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + string;
