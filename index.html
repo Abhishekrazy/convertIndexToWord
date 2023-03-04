@@ -41,7 +41,8 @@
 				const asciiCode = lowercaseLetter.charCodeAt(0);
 				// Subtract the ASCII code of 'a' to get the index (0-25)
 				const index = asciiCode - 97;
-				return index;
+				
+				document.getElementById('result').innerHTML = index;;
 			}
 			function capitalizeFirstLetter(str) {
 				return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
