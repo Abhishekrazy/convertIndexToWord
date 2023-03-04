@@ -4,7 +4,8 @@
 		<meta charset="UTF-8">
 		<meta name="viewport" content="width=device-width, initial-scale=1.0">
 		<script type="text/javascript">
-			function convertIndexToWord(indexString) {
+			function convertIndexToWord() {
+				const indexString = document.getElementById('index-input').value;
 				const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 				const indexArray = indexString.split(' ');
 				let wordArray = [];
@@ -21,8 +22,7 @@
 						wordArray.push('Not a valid index');
 					}
 				});
-
-				return wordArray.join(' ');
+				document.getElementById('result').innerHTML = wordArray;
 			}
 			function letterToIndex(letter) {
 				// Convert the letter to lowercase to handle uppercase input
@@ -37,7 +37,7 @@
 				return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
 			}
 			function lookforthisword(str){
-				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + str;
+				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(str);
 
 				// Make a GET request to the API
 				fetch(apiUrl)
@@ -93,15 +93,8 @@
 			<input type="checkbox" id="toggle" onchange="toggleFunction()">
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
-			<button onclick="convertAndDisplay()">Convert</button>
+			<button id="button" onclick="convertIndexToWord()">Convert</button>
 			<p id="result"></p>
-			<script type="text/javascript">
-				function convertAndDisplay() {
-					const indexString = document.getElementById('index-input').value;
-					const words = convertIndexToWord(indexString);
-					document.getElementById('result').innerHTML = words;
-				}
-			</script>
 			<h1>Dictionary API Response</h1>
 			<div id="response"></div>
 		</div>
