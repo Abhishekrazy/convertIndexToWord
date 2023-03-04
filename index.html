@@ -75,39 +75,19 @@
 					heading.innerText = "Convert Letter to Index";
 				}
 			}
-
-			document.addEventListener('DOMContentLoaded', function() {
-			var radios = document.querySelectorAll('input[type="radio"][name="graduate"]');
-
-			radios.forEach(function(radio) {
-				radio.addEventListener('change', function() {
-				if (this.value === "yin") {
-					document.querySelectorAll('.ug').forEach(function(element) {
-					element.style.display = 'none';
-					});
-					document.querySelectorAll('.phd').forEach(function(element) {
-					element.style.display = 'block';
-					});
-				} else {
-					document.querySelectorAll('.ug').forEach(function(element) {
-					element.style.display = 'block';
-					});
-					document.querySelectorAll('.phd').forEach(function(element) {
-					element.style.display = 'none';
-					});
+			function checkToggle(){
+				const toggle = document.getElementById("checkbox");
+				if(toggle.checked){
+					convertIndexToWord();
 				}
-				});
-			});
-			});
+				else{
+					letterToIndex();
+				}
+			}
+
 		</script>
 	</head>
 	<body>
-		<script>
-			window.onload = function() {
-				const button = document.getElementById('button');
-				button.setAttribute('onclick', 'convertIndexToWord()');
-			}
-		</script>
 		<div style="
 			display: flex;
 			flex-direction: column;
@@ -116,26 +96,10 @@
 			<h1 id="heading">Convert English Alphabet Index Number to Word</h1>
 			<p>Enter a Space-separated list of English alphabet index numbers:</p>
 			<input type="checkbox" id="checkbox" onchange="toggleFunction()">
+			<button id="button" onclick="checkToggle()">Convert</button>
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
 			<p id="result"></p>
-
-			<div class="ug">
-				<button id="button" onclick="checkToggle()">Convert</button>
-			</div>
-
-			<div class="phd">
-				<button id="button" onclick="checkToggle()">Convert</button>
-			</div>
-
-			<div class="switcher">
-				<input type="radio" name="graduate" value="yin" id="yin">
-				<label for="yin" class="switcher__label">Convert Index to Letter</label>
-				<input type="radio" name="graduate" value="yang" id="yang" checked="">
-				<label for="yang" class="switcher__label">Convert Letter to Index</label>
-				<span class="switcher__toggle"></span>
-			</div>
-
 			<h1>Dictionary API Response</h1>
 			<div id="response"></div>
 		</div>
