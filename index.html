@@ -29,7 +29,8 @@
 				}
 				document.getElementById('result').innerHTML = finalWord;;
 			}
-			function letterToIndex(letter) {
+			function letterToIndex() {
+				const letter = document.getElementById('index-input').value;
 				console.log('letter: ', letter);
 				// Convert the letter to lowercase to handle uppercase input
 				const lowercaseLetter = letter.toLowerCase();
