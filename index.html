@@ -26,8 +26,8 @@
 				align-items: center;
 				">
 			<h1>Alphabet Index Converter</h1>
-			<p>Enter a comma-separated list of English alphabet index numbers:</p>
-			<input type="text" id="index-input">
+			<p>Enter a Space-separated list of English alphabet index numbers:</p>
+			<input type="text" id="index-input" pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
 			<button onclick="convertAndDisplay()">Convert</button>
 			<p id="result"></p>
 
