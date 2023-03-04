@@ -61,7 +61,7 @@
 			window.currentFunction = convertIndexToWord;
 			function toggleFunction() {
 				// Get the toggle switch and the button elements
-				const toggle = document.getElementById("toggle");
+				const toggle = document.getElementById("checkbox");
 				const button = document.getElementById('button');
 				const heading = document.getElementById("heading");
 
@@ -99,7 +99,7 @@
 			">
 			<h1 id="heading">Convert English Alphabet Index Number to Word</h1>
 			<p>Enter a Space-separated list of English alphabet index numbers:</p>
-			<input type="checkbox" id="myCheckbox" onchange="toggleFunction()">
+			<input type="checkbox" id="checkbox" onchange="toggleFunction()">
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
 			<button id="button" onclick="convertIndexToWord()">Convert</button>
