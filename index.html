@@ -14,13 +14,17 @@
 					if(i <=26){
 						const word = alphabet.charAt(i);
 						wordArray.push(word);
+						capitalizeFirstLetter(wordArray);
 					}
 					else{
 						wordArray.push('Not a valid index');
 					}
 				});
 
-				return wordArray.join(', ');
+				return wordArray.join(' ');
+			}
+			function capitalizeFirstLetter(str) {
+				return str.charAt(0).toUpperCase() + str.slice(1);
 			}
 		</script>
 	</head>
