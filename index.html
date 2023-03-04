@@ -70,21 +70,35 @@
 				const heading = document.getElementById("heading");
 
 				if (toggle.checked) {
-					heading.innerText = "Convert English Alphabet Index Number to Word";
+					heading.innerText = "Convert Index to Letter";
 				} else {
 					heading.innerText = "Convert Letter to Index";
 				}
 			}
-			function checkToggle(){
-				const toggle = document.getElementById("checkbox");
 
-				if (toggle.checked) {
-					convertIndexToWord()
+			document.addEventListener('DOMContentLoaded', function() {
+			var radios = document.querySelectorAll('input[type="radio"][name="graduate"]');
+
+			radios.forEach(function(radio) {
+				radio.addEventListener('change', function() {
+				if (this.value === "yin") {
+					document.querySelectorAll('.ug').forEach(function(element) {
+					element.style.display = 'none';
+					});
+					document.querySelectorAll('.phd').forEach(function(element) {
+					element.style.display = 'block';
+					});
+				} else {
+					document.querySelectorAll('.ug').forEach(function(element) {
+					element.style.display = 'block';
+					});
+					document.querySelectorAll('.phd').forEach(function(element) {
+					element.style.display = 'none';
+					});
 				}
-				else {
-					letterToIndex();
-				}
-			}
+				});
+			});
+			});
 		</script>
 	</head>
 	<body>
@@ -104,8 +118,24 @@
 			<input type="checkbox" id="checkbox" onchange="toggleFunction()">
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
-			<button id="button" onclick="checkToggle()">Convert</button>
 			<p id="result"></p>
+
+			<div class="ug">
+				<button id="button" onclick="checkToggle()">Convert</button>
+			</div>
+
+			<div class="phd">
+				<button id="button" onclick="checkToggle()">Convert</button>
+			</div>
+
+			<div class="switcher">
+				<input type="radio" name="graduate" value="yin" id="yin">
+				<label for="yin" class="switcher__label">Convert Index to Letter</label>
+				<input type="radio" name="graduate" value="yang" id="yang" checked="">
+				<label for="yang" class="switcher__label">Convert Letter to Index</label>
+				<span class="switcher__toggle"></span>
+			</div>
+
 			<h1>Dictionary API Response</h1>
 			<div id="response"></div>
 		</div>
