@@ -36,6 +36,9 @@
 			function letterToIndex(letter) {
 				// Convert the letter to lowercase to handle uppercase input
 				const lowercaseLetter = letter.toLowerCase();
+
+				//Check the Word in the Dictionary
+				lookforthisword(lowercaseLetter);
 				// Get the ASCII code of the lowercase letter
 				const asciiCode = lowercaseLetter.charCodeAt(0);
 				// Subtract the ASCII code of 'a' to get the index (0-25)
