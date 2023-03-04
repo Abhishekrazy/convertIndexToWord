@@ -40,7 +40,7 @@
 				return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
 			}
 			function lookforthisword(str){
-				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(str);
+				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + encodeURIComponent(str.trim);
 
 				// Make a GET request to the API
 				fetch(apiUrl)
