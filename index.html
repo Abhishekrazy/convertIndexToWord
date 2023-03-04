@@ -10,27 +10,28 @@
 				const alphabet = 'abcdefghijklmnopqrstuvwxyz';
 				const indexArray = indexString.split(' ');
 				let wordArray = [];
+				let finalWord = '';
 
 				indexArray.forEach(index => {
 					const i = parseInt(index.trim()) - 1;
 					if(i <=26){
 						const word = alphabet.charAt(i);
 						wordArray.push(word);
-						wordArray = wordArray.join('');
+						finalWord = wordArray.join('');
 					}
 					else{
-						wordArray.push('Not a valid index');
+						finalWord.push('Not a valid index');
 					}
 				});
-				if(wordArray != 'Not a valid index'){
-					console.log('wordArray Before: ', wordArray);
-					wordArray = capitalizeFirstLetter(wordArray);
+				if(finalWord != 'Not a valid index'){
+					console.log('finalWord Before: ', finalWord);
+					wordArray = capitalizeFirstLetter(finalWord);
 
-					console.log('wordArray After: ', wordArray);
-					lookforthisword(wordArray);
+					console.log('finalWord After: ', finalWord);
+					lookforthisword(finalWord);
 				}
-				console.log('wordArray: ', wordArray);
-				document.getElementById('result').innerHTML = wordArray;;
+				console.log('finalWord: ', finalWord);
+				document.getElementById('result').innerHTML = finalWord;;
 			}
 			function letterToIndex(letter) {
 				// Convert the letter to lowercase to handle uppercase input
