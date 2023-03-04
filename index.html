@@ -54,6 +54,8 @@
 					console.error('Error:', error);
 					});
 			}
+			// Set the default function to letterToIndex()
+			window.currentFunction = letterToIndex;
 			function toggleFunction() {
 				const useLetterToIndex = document.getElementById('toggle-function').checked;
 				if (useLetterToIndex) {
@@ -62,24 +64,7 @@
 					window.currentFunction = convertIndexToWord;
 				}
 			}
-			// Set the default function to letterToIndex()
-			window.currentFunction = letterToIndex;
-			function handleInput() {
-				const input = document.getElementById('input').value;
-				const output = document.getElementById('output');
 
-				// Split the input into an array of values
-				const values = input.split(' ');
-
-				// Apply the selected function to each value and join the results
-				const result = values.map(value => window.currentFunction(value)).join(', ');
-
-				// Set the output text
-				output.innerText = result;
-			}
-			// Add an event listener to the input element
-			const input = document.getElementById('input');
-			input.addEventListener('input', handleInput);
 		</script>
 	</head>
 	<body>
