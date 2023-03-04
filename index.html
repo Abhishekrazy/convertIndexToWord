@@ -11,8 +11,13 @@
 
 				indexArray.forEach(index => {
 					const i = parseInt(index.trim()) - 1;
-					const word = alphabet.charAt(i);
-					wordArray.push(word);
+					if(i <=26){
+						const word = alphabet.charAt(i);
+						wordArray.push(word);
+					}
+					else{
+						wordArray.push('Not a valid index');
+					}
 				});
 
 				return wordArray.join(', ');
@@ -21,13 +26,14 @@
 	</head>
 	<body>
 		<div style="
-				display: flex;
-				flex-direction: column;
-				align-items: center;
-				">
+			display: flex;
+			flex-direction: column;
+			align-items: center;
+			">
 			<h1>Alphabet Index Converter</h1>
 			<p>Enter a Space-separated list of English alphabet index numbers:</p>
-			<input type="text" id="index-input" pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
+			<input type="text" id="index-input"
+				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
 			<button onclick="convertAndDisplay()">Convert</button>
 			<p id="result"></p>
 
