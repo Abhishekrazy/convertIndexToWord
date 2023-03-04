@@ -69,6 +69,8 @@
 				} else {
 					heading.innerText = "Convert English Alphabet Index Number to Word";
 				}
+				const checkbox = document.querySelector('#myCheckbox');
+  				checkbox.setAttribute('checked', true);
 				// Add an event listener to the toggle switch
 				toggle.addEventListener('change', function() {
 				// If the toggle switch is checked, update the button's onclick attribute to call convertIndexToWord()
@@ -85,6 +87,12 @@
 		</script>
 	</head>
 	<body>
+		<script>
+			window.onload = function() {
+				const button = document.getElementById('button');
+				button.setAttribute('onclick', 'convertIndexToWord()');
+			}
+		</script>
 		<div style="
 			display: flex;
 			flex-direction: column;
@@ -92,7 +100,7 @@
 			">
 			<h1 id="heading">Convert English Alphabet Index Number to Word</h1>
 			<p>Enter a Space-separated list of English alphabet index numbers:</p>
-			<input type="checkbox" id="toggle" onchange="toggleFunction()">
+			<input type="checkbox" id="myCheckbox" onchange="toggleFunction()">
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
 			<button id="button" onclick="convertIndexToWord()">Convert</button>
