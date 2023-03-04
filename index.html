@@ -23,9 +23,62 @@
 
 				return wordArray.join(' ');
 			}
+			function letterToIndex(letter) {
+				// Convert the letter to lowercase to handle uppercase input
+				const lowercaseLetter = letter.toLowerCase();
+				// Get the ASCII code of the lowercase letter
+				const asciiCode = lowercaseLetter.charCodeAt(0);
+				// Subtract the ASCII code of 'a' to get the index (0-25)
+				const index = asciiCode - 97;
+				return index;
+			}
 			function capitalizeFirstLetter(str) {
 				return str.charAt(0).toUpperCase() + str.slice(1);
 			}
+			function lookforthisword(string){
+				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + string;
+
+				// Make a GET request to the API
+				fetch(apiUrl)
+					.then(response => response.json())
+					.then(data => {
+					// Format the response as a string
+					const formattedResponse = JSON.stringify(data, null, 2);
+
+					// Display the response in a <pre> element
+					const responseElement = document.getElementById('response');
+					responseElement.innerHTML = `<pre>${formattedResponse}</pre>`;
+					})
+					.catch(error => {
+					console.error('Error:', error);
+					});
+			}
+			function toggleFunction() {
+				const useLetterToIndex = document.getElementById('toggle-function').checked;
+				if (useLetterToIndex) {
+					window.currentFunction = letterToIndex;
+				} else {
+					window.currentFunction = convertIndexToWord;
+				}
+			}
+			// Set the default function to letterToIndex()
+			window.currentFunction = letterToIndex;
+			function handleInput() {
+				const input = document.getElementById('input').value;
+				const output = document.getElementById('output');
+
+				// Split the input into an array of values
+				const values = input.split(' ');
+
+				// Apply the selected function to each value and join the results
+				const result = values.map(value => window.currentFunction(value)).join(', ');
+
+				// Set the output text
+				output.innerText = result;
+			}
+			// Add an event listener to the input element
+			const input = document.getElementById('input');
+			input.addEventListener('input', handleInput);
 		</script>
 	</head>
 	<body>
@@ -36,6 +89,7 @@
 			">
 			<h1>Alphabet Index Converter</h1>
 			<p>Enter a Space-separated list of English alphabet index numbers:</p>
+			<input type="checkbox" id="toggle-function" onchange="toggleFunction()">
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
 			<button onclick="convertAndDisplay()">Convert</button>
@@ -49,5 +103,7 @@
 				}
 			</script>
 		</div>
+		<h1>Dictionary API Response</h1>
+		<div id="response"></div>
 	</body>
 </html>
