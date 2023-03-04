@@ -55,8 +55,16 @@
 					});
 			}
 			// Set the default function to letterToIndex()
-			window.currentFunction = letterToIndex;
+			window.currentFunction = convertIndexToWord;
 			function toggleFunction() {
+				const toggle = document.getElementById("toggle");
+				const heading = document.getElementById("heading");
+
+				if (toggle.checked) {
+				heading.innerText = "Convert Letter to Index";
+				} else {
+				heading.innerText = "Convert English Alphabet Index Number to Word";
+				}
 				const useLetterToIndex = document.getElementById('toggle-function').checked;
 				if (useLetterToIndex) {
 					window.currentFunction = letterToIndex;
@@ -73,7 +81,7 @@
 			flex-direction: column;
 			align-items: center;
 			">
-			<h1>Alphabet Index Converter</h1>
+			<h1 id="heading">Convert English Alphabet Index Number to Word</h1>
 			<p>Enter a Space-separated list of English alphabet index numbers:</p>
 			<input type="checkbox" id="toggle-function" onchange="toggleFunction()">
 			<input type="text" id="index-input"
