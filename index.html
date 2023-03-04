@@ -22,8 +22,10 @@
 					}
 				});
 				if(wordArray != 'Not a valid index'){
-					wordArray = capitalizeFirstLetter(wordArray);
-					lookforthisword(wordArray.join(''));
+					console.log('wordArray Before: ', wordArray);
+					wordArray = capitalizeFirstLetter(wordArray).join('');
+					console.log('wordArray After: ', wordArray);
+					lookforthisword(wordArray);
 				}
 				console.log('wordArray: ', wordArray.join(''));
 				document.getElementById('result').innerHTML = wordArray.join('');;
