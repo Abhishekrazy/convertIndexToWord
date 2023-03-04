@@ -127,9 +127,90 @@ function lookforthisword(str) {
 						myDiv.appendChild(div);
 					}
 				}
+				const meaningdiv = document.createElement("div");
+				meaningdiv.id = "meaningdiv";
+				for (let meaning of key.meanings) {
+					const p = document.createElement("p");
+					p.setAttribute(
+						"style",
+						"text-align:left;font-size:12px; text-decoration: none;"
+					);
+					p.innerText = "Part Of Speech: " + meaning.partOfSpeech;
+					p.className = "tag";
+					meaningdiv.appendChild(p);
+					for (let definition in meaning.definitions) {
+						const definitionP = document.createElement("p");
+						definitionP.innerText =
+							"Definition: " + meaning.definitions[definition].definition;
+						meaningdiv.appendChild(definitionP);
+						if (meaning.definitions[definition].example) {
+							const exampleP = document.createElement("p");
+							exampleP.innerText =
+								"Example: " + meaning.definitions[definition].example;
+							meaningdiv.appendChild(exampleP);
+						}
+						if (definition.synonyms) {
+							const synonymsP = document.createElement("p");
+							synonymsP.innerText = "synonyms: ";
+							for (let synonyms of definition.synonyms) {
+								const synonymsChip = document.createElement("p");
+								synonymsChip.innerText = synonyms;
+								synonymsChip.className = "tag";
+								synonymsChip.setAttribute(
+									"style",
+									"text-align:left;font-size:8px; font-wight:400; text-decoration: none;"
+								);
+								synonymsP.appendChild(synonymsChip);
+							}
+							meaningdiv.appendChild(synonymsP);
+						}
+						if (definition.antonyms) {
+							const antonymsP = document.createElement("p");
+							antonymsP.innerText =
+								"antonyms: " + meaning.definitions[antonyms];
+							for (let antonyms of definition.antonyms) {
+								const synonymsChip = document.createElement("p");
+								synonymsChip.innerText = synonyms;
+								synonymsChip.className = "tag";
+								synonymsChip.setAttribute(
+									"style",
+									"text-align:left;font-size:8px; font-wight:400; text-decoration: none;"
+								);
+								antonymsP.appendChild(synonymsChip);
+							}
+							meaningdiv.appendChild(antonymsP);
+						}
+					}
+					if (meaning.synonyms) {
+						const synonymsP = document.createElement("p");
+						synonymsP.innerText = "synonyms: ";
+						for (let synonyms of meaning.synonyms) {
+							const synonymsChip = document.createElement("p");
+							synonymsChip.innerText = synonyms;
+							synonymsChip.className = "tag";
+							synonymsChip.setAttribute(
+								"style",
+								"text-align:left;font-size:8px; font-wight:400; text-decoration: none;"
+							);
+							synonymsP.appendChild(synonymsChip);
+						}
+						meaningdiv.appendChild(synonymsP);
+					}
+				}
+				for (let sourceUrl in key.sourceUrls) {
+					const a = document.createElement("a");
+					a.setAttribute(
+						"style",
+						"text-align:center;font-size:12px; text-decoration: none;"
+					);
+					a.setAttribute("href", key.sourceUrls[sourceUrl]);
+					a.innerText = "Source";
+					meaningdiv.appendChild(a);
+				}
+				responseElement.appendChild(meaningdiv);
 			}
 			// Display the response in a <pre> element
-			responseElement.innerHTML = `<p style="text-align:center;">${formattedResponse}</p>`;
+			//responseElement.innerHTML = `<p style="text-align:center;">${formattedResponse}</p>`;
 		})
 		.catch((error) => {
 			return console.error("Error:", error);
@@ -157,9 +238,6 @@ function toggleFunction() {
 		helpText.innerText = "Enter word without space";
 	}
 }
-
-const form = document.getElementById("myForm");
-form.addEventListener("submit", validateForm);
 
 function validateForm() {
 	event.preventDefault();
