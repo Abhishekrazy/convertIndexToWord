@@ -24,13 +24,9 @@
 					}
 				});
 				if(finalWord != 'Not a valid index'){
-					console.log('finalWord Before: ', finalWord);
 					wordArray = capitalizeFirstLetter(finalWord);
-
-					console.log('finalWord After: ', finalWord);
 					lookforthisword(finalWord);
 				}
-				console.log('finalWord: ', finalWord);
 				document.getElementById('result').innerHTML = finalWord;;
 			}
 			function letterToIndex(letter) {
@@ -61,7 +57,7 @@
 
 					// Display the response in a <pre> element
 					const responseElement = document.getElementById('response');
-					responseElement.innerHTML = `<pre>${formattedResponse}</pre>`;
+					responseElement.innerHTML = `<p>${formattedResponse}</p>`;
 					})
 					.catch(error => {
 					console.error('Error:', error);
