@@ -1,44 +1,43 @@
-<!DOCTYPE html>
 <html>
-<head>
-  <title>Alphabet Index Converter</title>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <script type="text/javascript">
-    function convertIndexToWord(indexString) {
-      const alphabet = 'abcdefghijklmnopqrstuvwxyz';
-      const indexArray = indexString.split(',');
-      let wordArray = [];
+	<head>
+		<title>Alphabet Index Converter</title>
+		<meta charset="UTF-8">
+		<meta name="viewport" content="width=device-width, initial-scale=1.0">
+		<script type="text/javascript">
+			function convertIndexToWord(indexString) {
+				const alphabet = 'abcdefghijklmnopqrstuvwxyz';
+				const indexArray = indexString.split(' ');
+				let wordArray = [];
 
-      indexArray.forEach(index => {
-        const i = parseInt(index.trim()) - 1;
-        const word = alphabet.charAt(i);
-        wordArray.push(word);
-      });
+				indexArray.forEach(index => {
+					const i = parseInt(index.trim()) - 1;
+					const word = alphabet.charAt(i);
+					wordArray.push(word);
+				});
 
-      return wordArray.join(', ');
-    }
-  </script>
-</head>
-<body>
-    <div style="
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-">
-  <h1>Alphabet Index Converter</h1>
-  <p>Enter a comma-separated list of English alphabet index numbers:</p>
-  <input type="text" id="index-input">
-  <button onclick="convertAndDisplay()">Convert</button>
-  <p id="result"></p>
+				return wordArray.join(', ');
+			}
+		</script>
+	</head>
+	<body>
+		<div style="
+				display: flex;
+				flex-direction: column;
+				align-items: center;
+				">
+			<h1>Alphabet Index Converter</h1>
+			<p>Enter a comma-separated list of English alphabet index numbers:</p>
+			<input type="text" id="index-input">
+			<button onclick="convertAndDisplay()">Convert</button>
+			<p id="result"></p>
 
-  <script type="text/javascript">
-    function convertAndDisplay() {
-      const indexString = document.getElementById('index-input').value;
-      const words = convertIndexToWord(indexString);
-      document.getElementById('result').innerHTML = words;
-    }
-  </script>
-</div>
-</body>
+			<script type="text/javascript">
+				function convertAndDisplay() {
+					const indexString = document.getElementById('index-input').value;
+					const words = convertIndexToWord(indexString);
+					document.getElementById('result').innerHTML = words;
+				}
+			</script>
+		</div>
+	</body>
 </html>
