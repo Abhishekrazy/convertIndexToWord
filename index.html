@@ -1,4 +1,5 @@
-<html>
+<!DOCTYPE html>
+<html lang="en">
 	<head>
 		<title>Alphabet Index Converter</title>
 		<meta charset="UTF-8">
@@ -62,7 +63,6 @@
 			function toggleFunction() {
 				// Get the toggle switch and the button elements
 				const toggle = document.getElementById("checkbox");
-				const button = document.getElementById('button');
 				const heading = document.getElementById("heading");
 
 				if (toggle.checked) {
@@ -70,19 +70,17 @@
 				} else {
 					heading.innerText = "Convert English Alphabet Index Number to Word";
 				}
-				// Add an event listener to the toggle switch
-				toggle.addEventListener('change', function() {
-				// If the toggle switch is checked, update the button's onclick attribute to call convertIndexToWord()
-				if (toggle.checked) {
-					button.setAttribute('onclick', 'convertIndexToWord()');
-				}
-				// If the toggle switch is not checked, update the button's onclick attribute to call letterToIndex()
-				else {
-					button.setAttribute('onclick', 'letterToIndex()');
-				}
-				});
 			}
+			function checkToggle(){
+				const toggle = document.getElementById("checkbox");
 
+				if (toggle.checked) {
+					convertIndexToWord()
+				}
+				else {
+					letterToIndex();
+				}
+			}
 		</script>
 	</head>
 	<body>
@@ -102,7 +100,7 @@
 			<input type="checkbox" id="checkbox" onchange="toggleFunction()">
 			<input type="text" id="index-input"
 				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
-			<button id="button" onclick="convertIndexToWord()">Convert</button>
+			<button id="button" onclick="checkToggle()">Convert</button>
 			<p id="result"></p>
 			<h1>Dictionary API Response</h1>
 			<div id="response"></div>
