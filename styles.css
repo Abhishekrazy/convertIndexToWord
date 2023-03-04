@@ -1,0 +1,182 @@
+.input-contain {
+	position: relative;
+	padding: 10px;
+}
+
+.input-text {
+	width: 230px;
+	height: 35px;
+	font-size: 10px;
+	padding-left: 10px;
+	border: 2px solid black;
+	border-radius: 1rem;
+}
+
+.input-text:focus {
+	outline: none;
+	border-color: blueviolet;
+}
+
+
+/* Button CSS */
+.button {
+	position: relative;
+	width: 150px;
+	height: 40px;
+	overflow: hidden;
+	border: none;
+	border-radius: 35px;
+	background-image: linear-gradient(90deg, blueviolet, blueviolet);
+	color: #fff;
+	font-weight: 500;
+	font-size: 15px;
+	letter-spacing: 1.5px;
+	outline: none;
+	cursor: pointer;
+}
+
+.button:hover {
+	box-shadow: 0px 0px 20px -5px rgba(0, 0, 0, .2);
+}
+
+.button::before {
+	opacity: 0;
+	position: absolute;
+	top: calc(100% * var(--ripple-y));
+	left: calc(100% * var(--ripple-x));
+	transform: translate(-50%, -50%) scale(1);
+	padding: 50%;
+	border-radius: 50%;
+	background-color: #fff;
+	content: '';
+	transition: transform 1s, opacity 1s;
+}
+
+.button:active::before {
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(0);
+	transition: 0s;
+}
+
+.button::after {
+	opacity: 0;
+	position: absolute;
+	top: calc(100% * var(--ripple-y));
+	left: calc(100% * var(--ripple-x));
+	transform: translate(-50%, -50%) scale(1);
+	padding: 50%;
+	border-radius: 50%;
+	background-color: #fff;
+	content: '';
+	transition: transform 2s, opacity 2s;
+}
+
+.button:active::after {
+	opacity: 1;
+	transform: translate(-50%, -50%) scale(0);
+	transition: 0s;
+}
+
+.help-text {
+	font-size: 0.8em;
+	color: gray;
+	margin-top: 5px;
+}
+
+
+
+/* Checkbox CSS */
+
+@supports (-webkit-appearance: none) or (-moz-appearance: none) {
+
+	input[type=checkbox],
+	input[type=radio] {
+		--active: blueviolet;
+		--active-inner: #fff;
+		--focus: 2px blueviolet;
+		--border: #BBC1E1;
+		--border-hover: blueviolet;
+		--background: #fff;
+		--disabled: #F6F8FF;
+		--disabled-inner: #E1E6F9;
+		-webkit-appearance: none;
+		-moz-appearance: none;
+		height: 21px;
+		outline: none;
+		display: inline-block;
+		vertical-align: top;
+		position: relative;
+		margin: 0;
+		cursor: pointer;
+		border: 1px solid var(--bc, var(--border));
+		background: var(--b, var(--background));
+		transition: background 0.3s, border-color 0.3s, box-shadow 0.2s;
+	}
+
+	input[type=checkbox]:after,
+	input[type=radio]:after {
+		content: "";
+		display: block;
+		left: 0;
+		top: 0;
+		position: absolute;
+		transition: transform var(--d-t, 0.3s) var(--d-t-e, ease), opacity var(--d-o, 0.2s);
+	}
+
+	input[type=checkbox]:checked,
+	input[type=radio]:checked {
+		--b: var(--active);
+		--bc: var(--active);
+		--d-o: .3s;
+		--d-t: .6s;
+		--d-t-e: cubic-bezier(.2, .85, .32, 1.2);
+	}
+
+	input[type=checkbox]:disabled,
+	input[type=radio]:disabled {
+		--b: var(--disabled);
+		cursor: not-allowed;
+		opacity: 0.9;
+	}
+
+	input[type=checkbox]:disabled:checked,
+	input[type=radio]:disabled:checked {
+		--b: var(--disabled-inner);
+		--bc: var(--border);
+	}
+
+	input[type=checkbox]:disabled+label,
+	input[type=radio]:disabled+label {
+		cursor: not-allowed;
+	}
+
+	input[type=checkbox]:hover:not(:checked):not(:disabled),
+	input[type=radio]:hover:not(:checked):not(:disabled) {
+		--bc: var(--border-hover);
+	}
+
+	input[type=checkbox]:focus,
+	input[type=radio]:focus {
+		box-shadow: 0 0 0 var(--focus);
+	}
+
+	input[type=checkbox].switch {
+		width: 38px;
+		border-radius: 11px;
+	}
+
+	input[type=checkbox].switch:after {
+		left: 2px;
+		top: 2px;
+		border-radius: 50%;
+		width: 15px;
+		height: 15px;
+		background: var(--ab, var(--border));
+		transform: translateX(var(--x, 0));
+	}
+
+	input[type=checkbox].switch:checked {
+		--ab: var(--active-inner);
+		--x: 17px;
+	}
+}
