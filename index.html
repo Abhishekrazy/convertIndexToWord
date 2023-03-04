@@ -57,7 +57,7 @@
 
 					// Display the response in a <pre> element
 					const responseElement = document.getElementById('response');
-					responseElement.innerHTML = `<p>${formattedResponse}</p>`;
+					responseElement.innerHTML = `<p style="text-align:center;">${formattedResponse}</p>`;
 					})
 					.catch(error => {
 					console.error('Error:', error);
@@ -93,8 +93,7 @@
 			flex-direction: column;
 			align-items: center;
 			">
-			<h1 id="heading">Convert English Alphabet Index Number to Word</h1>
-			<p>Enter a Space-separated list of English alphabet index numbers:</p>
+			<h1 id="heading">Convert Letter to Index</h1>
 			<input type="checkbox" id="checkbox" onchange="toggleFunction()">
 			<button id="button" onclick="checkToggle()">Convert</button>
 			<input type="text" id="index-input"
