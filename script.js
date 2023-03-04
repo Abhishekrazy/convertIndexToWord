@@ -4,39 +4,44 @@ function handleChange() {
 }
 
 function convertIndexToWord() {
-	const indexString = document.getElementById("index-input").value;
+	let indexString = document.getElementById("index-input").value.trim();
+	indexString = indexString.replaceAll(",", " ");
 	const alphabet = "abcdefghijklmnopqrstuvwxyz";
+	console.log("indexString: ", indexString);
 	if (indexString) {
-		const indexArray = indexString.split(" ");
+		let indexArray = indexString.trim().split(/[.\s]+/);
 		let wordArray = [];
 		let finalWord = "";
-		let value = "";
 
 		indexArray.forEach((index) => {
+			console.log("index: ", index);
 			const i = parseInt(index.trim()) - 1;
 			if (i <= 26) {
 				const word = alphabet.charAt(i);
 				wordArray.push(word);
 				finalWord = wordArray.join("");
 			} else {
-				finalWord = "Not a valid index";
+				let errorText = document.getElementById("errorText");
+				// Display an error message
+				errorText.innerHTML = "Not a valid index";
 			}
 		});
 		if (finalWord != "Not a valid index") {
 			wordArray = capitalizeFirstLetter(finalWord);
-			if (finalWord) lookforthisword(finalWord);
+			if (finalWord) {
+				lookforthisword(finalWord);
+			}
 		}
 		document.getElementById("result").innerHTML = finalWord;
 	}
 }
 function letterToIndex() {
-	const input = document.getElementById("index-input").value;
+	let input = document.getElementById("index-input").value;
+	input = input.replace(" ", "").trim();
 	if (input) {
 		lookforthisword(input);
-		console.log("input: ", input);
 		// Split the input string by space into an array of words
 		const words = input.split("");
-		console.log("words: ", words);
 		// Array to store the index of each word
 		const indices = [];
 		// Loop through each word, convert it to index, and push to indices array
@@ -61,25 +66,22 @@ function capitalizeFirstLetter(str) {
 	return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
 }
 function lookforthisword(str) {
-	console.log("str: ", str);
 	const apiUrl = "https://api.dictionaryapi.dev/api/v2/entries/en/" + str; //encodeURIComponent();
-
 	// Make a GET request to the API
+	const responseElement = document.getElementById("responsetext");
 	fetch(apiUrl)
 		.then((response) => {
 			if (response.status === 404) {
 				return response.json().then((error) => {
-					console.log(error.title);
-					console.log(error.message);
-					const responseElement = document.getElementById("response");
 					responseElement.innerHTML = `
 							<p style="text-align:center;">${error.title}</p>
 							<p style="text-align:center;">${error.message}</p>
 							<p style="text-align:center;">${error.resolution}</p>
 							`;
 				});
+			} else {
+				return response.json();
 			}
-			return response.json();
 		})
 		.then((data) => {
 			// Format the response as a string
@@ -87,8 +89,6 @@ function lookforthisword(str) {
 			const myDiv = document.getElementById("my-audio");
 			myDiv.innerHTML = "";
 			for (let key of data) {
-				// select the div where you want to append the audio element
-
 				for (let phoetics of key.phonetics) {
 					if (phoetics.audio) {
 						const div = document.createElement("div");
@@ -129,11 +129,10 @@ function lookforthisword(str) {
 				}
 			}
 			// Display the response in a <pre> element
-			const responseElement = document.getElementById("response");
 			responseElement.innerHTML = `<p style="text-align:center;">${formattedResponse}</p>`;
 		})
 		.catch((error) => {
-			console.error("Error:", error);
+			return console.error("Error:", error);
 		});
 }
 // Set the default function to letterToIndex()
@@ -142,7 +141,6 @@ function toggleFunction() {
 	const toggle = document.getElementById("checkbox");
 	const heading = document.getElementById("heading");
 	const divText = document.getElementById("index-input");
-	const checkboxLabel = document.getElementById("checkboxLabel");
 	let helpText = document.getElementById("helptext");
 
 	if (toggle.checked) {
@@ -150,14 +148,12 @@ function toggleFunction() {
 		heading.innerText = "Convert Index to Letter";
 		divText.pattern = "^(0?[1-9]|[1-9][0-9])s?(0?[1-9]|[1-2][0-6])?$";
 		divText.placeholder = "Enter Indexes";
-		checkboxLabel.innerText = "Check if you want convert Index to Letter";
 		helpText.innerText = "Enter Indexes of the Letters";
 	} else {
 		toggle.title = "Check if you want convert Letter to Index";
 		heading.innerText = "Convert Letter to Index";
 		divText.pattern = "/[^a-zA-Z]+/g";
 		divText.placeholder = "Enter Text";
-		checkboxLabel.innerText = "Check if you want convert Letter to Index";
 		helpText.innerText = "Enter word without space";
 	}
 }
