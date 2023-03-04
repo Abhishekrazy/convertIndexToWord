@@ -31,6 +31,7 @@
 			}
 			function letterToIndex() {
 				const input = document.getElementById('index-input').value;
+				lookforthisword(input);
 				console.log('input: ', input);
 				// Split the input string by space into an array of words
 				const words = input.split(' ');
@@ -58,21 +59,63 @@
 				return str.toString().charAt(0).toUpperCase() + str.toString().slice(1);
 			}
 			function lookforthisword(str){
+				console.log('str: ', str);
 				const apiUrl = 'https://api.dictionaryapi.dev/api/v2/entries/en/' + str; //encodeURIComponent();
 
 				// Make a GET request to the API
 				fetch(apiUrl)
-					.then(response => response.json())
+					.then(response => {
+						if (response.status === 404) {
+						return response.json().then(error => {
+							console.log(error.title);
+							console.log(error.message);
+							const responseElement = document.getElementById('response');
+							responseElement.innerHTML = 
+							`
+							<p style="text-align:center;">${error.title}</p>
+							<p style="text-align:center;">${error.message}</p>
+							<p style="text-align:center;">${error.resolution}</p>
+							`;
+						});
+						}
+						return response.json();
+					})
 					.then(data => {
 					// Format the response as a string
 					const formattedResponse = JSON.stringify(data, null, 2);
+					for(let key of data){
+						// select the div where you want to append the audio element
+						const myDiv = document.getElementById('my-audio');
+						myDiv.innerHTML = '';
+						for(let phoetics of key.phonetics){
+							if(phoetics.audio){
+								console.log(JSON.stringify(phoetics.license.name));
+								// create the audio element
+								const audio = document.createElement('audio');
+								audio.controls = true;
+								
+								// create the source element and set its attributes
+								const source = document.createElement('source');
+								source.src = phoetics.audio;
+								source.type = 'audio/mpeg';
+								if(phoetics.license.name){
+									audio.setAttribute('title', phoetics.license.name);
+								}
+								// append the source element to the audio element
+								audio.appendChild(source);
 
+								// append the audio element to the div
+								myDiv.appendChild(audio);
+							}						
+						}
+					}
 					// Display the response in a <pre> element
 					const responseElement = document.getElementById('response');
 					responseElement.innerHTML = `<p style="text-align:center;">${formattedResponse}</p>`;
 					})
 					.catch(error => {
-					console.error('Error:', error);
+						console.error('Error:', error);
+						console.error('Error:', JSON.stringify(error));
 					});
 			}
 			// Set the default function to letterToIndex()
@@ -108,11 +151,14 @@
 			<h1 id="heading">Convert Letter to Index</h1>
 			<input type="checkbox" id="checkbox" onchange="toggleFunction()">
 			<input type="text" id="index-input"
-				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$">
+				pattern="^(?:[1-9]|1\d|2[0-6])(?:\s+(?:[1-9]|1\d|2[0-6]))*$" value="Hello">
 			<button id="button" onclick="checkToggle()">Convert</button>
 			<p id="result"></p>
 			<h1>Dictionary API Response</h1>
 			<div id="response"></div>
+
+			<div id="my-audio">
+			</div>
 		</div>
 	</body>
 </html>
